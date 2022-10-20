@@ -1,18 +1,13 @@
 import math
-x = [1.69, 1.62, 1.66, 1.64, 1.81, 1.66, 1.73, 1.69, 1.74, 1.66]
-#x = [1,2,3,4,5,5]
+#x = [1.69, 1.62, 1.66, 1.64, 1.81, 1.66, 1.73, 1.69, 1.74, 1.66]
+x = [1,2,3,4,5,5]
 #-----------------------------------------------------------------------
 def media(x): 
     media = 0
     for i in range(0, len(x)): 
         media += x[i]
-    print(media/len(x))
-#-----------------------------------------------------------------------
-def media2(x): 
-    media = 0
-    for i in range(0, len(x)): 
-        media += x[i]
-    return media/len(x)
+    media = media/len(x)
+    return media
 #-----------------------------------------------------------------------
 def moda(x): 
     sum = 0
@@ -27,46 +22,21 @@ def moda(x):
                     lista[i]['valor'] +=1
                     lista[j]['valor'] += 1
     #print(lista)
-    print(sortlista(lista)[len(x)-1]['inicial'])
     return sortlista(lista)[0]['inicial']
-
-
-def sortlista(lista): 
-    for i in range(0,(len(x)-1)): 
-        for j in range(0,(len(x)-1)):
-                if lista[j]['valor'] > lista[j+1]['valor']: 
-                    temp = lista[j]['valor']
-                    lista[j]['valor'] = lista[j+1]['valor']
-                    lista[j+1]['valor'] = temp
-    return lista
 #-----------------------------------------------------------------------
 def variancia(x): 
     sm = 0 
     for i in range(0,len(x)):
-        sm += pow(x[i]-media2(x),2)
-    variancia = sm/10
-    print(variancia)
-    return variancia
-
-def variancia2(x): 
-    sm = 0 
-    for i in range(0,len(x)):
-        sm += pow(x[i]-media2(x),2)
+        sm += pow(x[i]-media(x),2)
     variancia = sm/10
     return variancia
 #-----------------------------------------------------------------------
 def desvio(x): 
-    desvio = pow(variancia2(x), (1/2))
-    print(desvio)
+    desvio = pow(variancia(x), (1/2))
     return desvio
-
-def desvio2(x): 
-    desvio2  = pow(variancia2(x), (1/2))
-    return desvio2
 #-----------------------------------------------------------------------
 def coeficiente(x): 
-    coeficiente = desvio2(x)/(media2(x))
-    print(coeficiente)
+    coeficiente = (desvio(x))/(media(x)) * 100
     return coeficiente
 #-----------------------------------------------------------------------
 def mediana(x): 
@@ -78,19 +48,16 @@ def mediana(x):
     else:
         z = x[(len(x)+1)/2]
     mediana = z
-    print(mediana)
     return mediana
 #-----------------------------------------------------------------------
 def percentil75(x): 
     ordenar(x)
     percentil75 = x[math.ceil(len(x)*0.75)]
-    print(percentil75)
     return percentil75
 #-----------------------------------------------------------------------
 def percentil25(x): 
     ordenar(x)
     percentil25 = x[math.ceil(len(x)*0.25)]
-    print(percentil25)
     return percentil25
 #-----------------------------------
 def ordenar(x): 
@@ -101,16 +68,29 @@ def ordenar(x):
                 x[i] = x[i+1]
                 x[i+1] = temp 
     return x
+
+def sortlista(lista): 
+    for i in range(0,(len(x)-1)): 
+        for j in range(0,(len(x)-1)):
+                if lista[j]['valor'] > lista[j+1]['valor']: 
+                    temp = lista[j]['valor']
+                    lista[j]['valor'] = lista[j+1]['valor']
+                    lista[j+1]['valor'] = temp
+    return lista
 #-----------------------------------------------------------------------
 
-media(x)
-moda(x)
-variancia(x)
-desvio(x)
-coeficiente(x)
-mediana(x)
-percentil75(x)
-percentil25(x)
+media1 = media(x)
+moda1 = moda(x)
+desvio1 = desvio(x)
+coeficiente1 = coeficiente(x)
+mediana1 = mediana(x)
+percentil751 = percentil75(x)
+percentil251 = percentil25(x)
 
-
+print(f"A média é : {media1}\n")
+print(f"A moda é : {moda1}\n")
+print(f"O desvio é : {coeficiente1}\n")
+print(f"A mediana é : {mediana1}\n")
+print(f"O percentil 75 é : {percentil751}\n")
+print(f"O percentil 25 é : {percentil251}\n")
 
